@@ -2,6 +2,7 @@ package br.com.shadowscompany.StartApplication.config;
 
 import br.com.shadowscompany.StartApplication.domain.Post;
 import br.com.shadowscompany.StartApplication.domain.User;
+import br.com.shadowscompany.StartApplication.dto.AuthorDTO;
 import br.com.shadowscompany.StartApplication.repository.PostRepository;
 import br.com.shadowscompany.StartApplication.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +37,8 @@ public class Instantiation implements CommandLineRunner {
 
         userRepository.saveAll(Arrays.asList(maria, alex, bob));
 
-        Post post1 = new Post(null,sdf.parse("21/03/2018"), "Partiu viagem", "Vou para São Paulo . Abraços!", maria);
-        Post post2 = new Post(null,sdf.parse("23/03/2018"), "Bom Dia", "Acordei Feliz Hoje!", maria);
+        Post post1 = new Post(null,sdf.parse("21/03/2018"), "Partiu viagem", "Vou para São Paulo . Abraços!", new AuthorDTO(maria));
+        Post post2 = new Post(null,sdf.parse("23/03/2018"), "Bom Dia", "Acordei Feliz Hoje!", new AuthorDTO(maria));
 
         postRepository.saveAll(Arrays.asList(post1,post2));
     }
