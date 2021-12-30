@@ -3,6 +3,7 @@ package br.com.shadowscompany.StartApplication.config;
 import br.com.shadowscompany.StartApplication.domain.Post;
 import br.com.shadowscompany.StartApplication.domain.User;
 import br.com.shadowscompany.StartApplication.dto.AuthorDTO;
+import br.com.shadowscompany.StartApplication.dto.CommentDTO;
 import br.com.shadowscompany.StartApplication.repository.PostRepository;
 import br.com.shadowscompany.StartApplication.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.List;
 import java.util.TimeZone;
 
 @Configuration
@@ -39,6 +41,13 @@ public class Instantiation implements CommandLineRunner {
 
         Post post1 = new Post(null,sdf.parse("21/03/2018"), "Partiu viagem", "Vou para São Paulo . Abraços!", new AuthorDTO(maria));
         Post post2 = new Post(null,sdf.parse("23/03/2018"), "Bom Dia", "Acordei Feliz Hoje!", new AuthorDTO(maria));
+
+        CommentDTO c1 = new CommentDTO("Boa viagem mano!", sdf.parse("21/03/2018"), new AuthorDTO(alex));
+        CommentDTO c2 = new CommentDTO("Aproveite!", sdf.parse("2018/03/22"), new AuthorDTO(bob));
+        CommentDTO c3 = new CommentDTO("Tenha um ótimo dia!", sdf.parse("2018/03/23"), new AuthorDTO(alex));
+
+        post1.getComments().addAll(Arrays.asList(c1,c2));
+        post2.getComments().addAll(List.of(c3));
 
         postRepository.saveAll(Arrays.asList(post1,post2));
 
